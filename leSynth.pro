@@ -1,7 +1,7 @@
 TEMPLATE      = lib
 CONFIG       += plugin
 TARGET        = $$qtLibraryTarget(lesynth)
-DESTDIR       = ../../../bin/plugins/
+DESTDIR       = ../../../bin/qtau/plugins/
 
 INCLUDEPATH += ../../
 

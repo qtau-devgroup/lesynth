@@ -1,7 +1,5 @@
-#include "synth/lesynth/leSynth.h"
-#include "synth/lesynth/leConfig.h"
-
-#include <QDebug>
+#include "leSynth.h"
+#include "leConfig.h"
 
 #include <QDir>
 #include <QFile>
@@ -13,10 +11,15 @@ QString leSynth::description() { return "Le synthesizer pour QTau"; }
 QString leSynth::version()     { return QString("%1.%2")
                                     .arg(CONST_LESYNTH_VER_MJ).arg(CONST_LESYNTH_VER_MN); }
 
-bool leSynth::setVoicebank(QString path)
+void leSynth::setup(SSynthConfig &cfg)
+{
+    log = cfg.log;
+}
+
+bool leSynth::setVoicebank(const QString &path)
 {
     bool result = false;
-    QFile otoIni(path.append("/oto.ini"));
+    QFile otoIni(path + "/oto.ini");
 
     if (otoIni.open(QFile::ReadOnly))
     {
@@ -28,37 +31,33 @@ bool leSynth::setVoicebank(QString path)
             otoStrings << reader.readLine();
 
         vbCfg = otoFromStrings(otoStrings);
-        qDebug() << "cfg:" << vbCfg.keys().length();
+        dLog(QString("configured with %1 oto keys").arg(vbCfg.keys().length()));
         result = !vbCfg.isEmpty();
 
         otoIni.close();
     }
     else
-        qDebug() << "Le Synth could not open oto.ini from" << path;
+        eLog("Le Synth could not open oto.ini from " + path);
 
     return result;
 
 }
 
-bool leSynth::setVocals(const ust &u)           { songCfg = u;                           return isVocalsReady(); }
-bool leSynth::setVocals(QStringList ustStrings) { songCfg = ustFromStrings(ustStrings);  return isVocalsReady(); }
+bool leSynth::setVocals(const ust &u)           { songCfg = u;                    return isVocalsReady(); }
+bool leSynth::setVocals(const QStringList &ust) { songCfg = ustFromStrings(ust);  return isVocalsReady(); }
 
-bool leSynth::resample(const qtauAudio &a)
+bool leSynth::synthesize(const qtauAudioSource &/*a*/)
 {
-    qDebug() << "Resampling now! I swear!";
-
+    sLog("Resampling now! I swear!");
     return false;
 }
 
-bool leSynth::resample(QString outFileName)
+bool leSynth::synthesize(const QString &/*outFileName*/)
 {
-    // TODO:
+    sLog("Resampling now! I swear!");
     return false;
 }
 
 bool leSynth::isVbReady()         { return !vbCfg.isEmpty(); }
 bool leSynth::isVocalsReady()     { return !songCfg.notes.isEmpty(); }
 bool leSynth::supportsStreaming() { return false; }
-
-
-Q_EXPORT_PLUGIN2(lesynth_resampler, leSynth)
