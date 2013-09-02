@@ -23,7 +23,7 @@ public:
     bool setVocals(const ust &u);
     bool setVocals(const QStringList &ust);
 
-    bool synthesize(const qtauAudioSource &a);
+    bool synthesize(qtauAudioSource &a);
     bool synthesize(const QString &outFileName);
 
     bool isVbReady();

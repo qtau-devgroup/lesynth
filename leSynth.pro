@@ -2,6 +2,8 @@ TEMPLATE      = lib
 CONFIG       += plugin
 TARGET        = $$qtLibraryTarget(lesynth)
 
+QT += multimedia
+
 INCLUDEPATH += ../../
 
 HEADERS += \
