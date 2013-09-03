@@ -15,13 +15,15 @@ HEADERS += \
     leSynth.h \
     ../../tools/utauloid/ust.h \
     ../../tools/utauloid/oto.h \
-    ../../editor/audio/Source.h
+    ../../editor/audio/Source.h \
+    ../../editor/Utils.h
 
 SOURCES += \
     leSynth.cpp \
     ../../tools/utauloid/ust.cpp \
     ../../tools/utauloid/oto.cpp \
-    ../../editor/audio/Source.cpp
+    ../../editor/audio/Source.cpp \
+    ../../editor/Utils.cpp
 
 #--------------------------------------------
 CONFIG(debug, debug|release) {
