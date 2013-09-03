@@ -14,12 +14,14 @@ HEADERS += \
     leConfig.h \
     leSynth.h \
     ../../tools/utauloid/ust.h \
-    ../../tools/utauloid/oto.h
+    ../../tools/utauloid/oto.h \
+    ../../editor/audio/Source.h
 
 SOURCES += \
     leSynth.cpp \
     ../../tools/utauloid/ust.cpp \
-    ../../tools/utauloid/oto.cpp
+    ../../tools/utauloid/oto.cpp \
+    ../../editor/audio/Source.cpp
 
 #--------------------------------------------
 CONFIG(debug, debug|release) {

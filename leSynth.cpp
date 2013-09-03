@@ -81,7 +81,7 @@ bool leSynth::synthesize(qtauAudioSource &a)
         fmt.setChannelCount(channels);
         a.setAudioFormat(fmt);
 
-        float pulsesPerSecond = songCfg.tempo * MIDI_PPQ;
+        float pulsesPerSecond = (float)songCfg.tempo / 60.f * MIDI_PPQ;
         int   pulseOffset  = 0;
 
         foreach (const ust_note &n, songCfg.notes)
@@ -101,6 +101,7 @@ bool leSynth::synthesize(qtauAudioSource &a)
         }
 
         a.close();
+        result = a.size() > 0;
     }
     else eLog("LeSynth could not open audio for read/write, no synthesizing for you then.");
 
