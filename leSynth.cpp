@@ -1,7 +1,7 @@
 #include "leSynth.h"
 #include "leConfig.h"
 
-#include "editor/audio/Source.h"
+#include "audio/Source.h"
 
 #include <QDir>
 #include <QFile>
@@ -107,10 +107,26 @@ bool leSynth::synthesize(qtauAudioSource &a)
     return result;
 }
 
-bool leSynth::synthesize(const QString &/*outFileName*/)
+bool leSynth::synthesize(const QString &outFileName)
 {
-    sLog("Resampling now! I swear!");
-    return false;
+    qtauAudioSource as;
+    bool ok = synthesize(as);
+
+    if (ok)
+    {
+        QFile f(outFileName);
+
+        if (f.open(QFile::WriteOnly))
+        {
+            f.write(as.buffer());
+            f.close();
+            sLog("Synthesized to " + outFileName);
+        }
+        else
+            ok = false;
+    }
+
+    return ok;
 }
 
 bool leSynth::isVbReady()         { return true; } //!vbCfg.isEmpty(); }

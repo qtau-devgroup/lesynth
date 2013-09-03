@@ -1,9 +1,9 @@
 #ifndef LESYNTH_H
 #define LESYNTH_H
 
-#include "editor/PluginInterfaces.h"
-#include "tools/utauloid/oto.h"
-#include "tools/utauloid/ust.h"
+#include "PluginInterfaces.h"
+#include "utauloid/oto.h"
+#include "utauloid/ust.h"
 
 
 class leSynth : public QObject, public ISynth

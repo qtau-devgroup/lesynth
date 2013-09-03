@@ -1,10 +1,14 @@
-TEMPLATE      = lib
-CONFIG       += plugin
-TARGET        = $$qtLibraryTarget(lesynth)
+#-------------------------------------------------
+# http://github.com/qtau-devgroup/lesynth
+#-------------------------------------------------
+
+TEMPLATE = lib
+CONFIG  += plugin
+TARGET   = $$qtLibraryTarget(lesynth)
 
 QT += multimedia
 
-INCLUDEPATH += ../../
+INCLUDEPATH += ../../editor ../
 
 HEADERS += \
     leConfig.h \
@@ -19,9 +23,9 @@ SOURCES += \
 
 #--------------------------------------------
 CONFIG(debug, debug|release) {
-    COMPILEDIR = $${OUT_PWD}/debug
+    COMPILEDIR = $${OUT_PWD}/../../debug
 } else {
-    COMPILEDIR = $${OUT_PWD}/release
+    COMPILEDIR = $${OUT_PWD}/../../release
 }
 
 DESTDIR         = $${COMPILEDIR}/plugins
