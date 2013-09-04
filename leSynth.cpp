@@ -69,7 +69,7 @@ bool leSynth::synthesize(qtauAudioSource &a)
             if (n.pulseOffset > pulseOffset)
             {
                 float silenceSeconds = (float)(n.pulseOffset - pulseOffset) / pulsesPerSecond;
-                int   silenceSamples = silenceSeconds / sampleRate;
+                int   silenceSamples = silenceSeconds * sampleRate;
                 a.write(QByteArray(silenceSamples * frameSizeBytes, '\0')); // write silence
             }
 
