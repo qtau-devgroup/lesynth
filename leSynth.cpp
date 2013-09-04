@@ -54,6 +54,16 @@ bool leSynth::synthesize(qtauAudioSource &a)
         float pulsesPerSecond = (float)songCfg.tempo / 60.f * MIDI_PPQ;
         int   pulseOffset  = 0;
 
+        a.buffer().clear();
+
+        if (!songCfg.notes.isEmpty())
+        {
+            const ust_note &lastNote = songCfg.notes.last();
+            float totalPulses = lastNote.pulseOffset + lastNote.pulseLength;
+            a.buffer().reserve(fmt.bytesForDuration((totalPulses / pulsesPerSecond) * 1000000) + 10);
+        }
+        else eLog("Synthesizing an empty note set! Forgot to check isVocalsReady()?");
+
         foreach (const ust_note &n, songCfg.notes)
         {
             if (n.pulseOffset > pulseOffset)
