@@ -25,6 +25,8 @@ SOURCES += \
     ../../editor/audio/Source.cpp \
     ../../editor/Utils.cpp
 
+QMAKE_CXXFLAGS += -Wall -std=c++11
+
 #--------------------------------------------
 CONFIG(debug, debug|release) {
     COMPILEDIR = $${OUT_PWD}/../../debug

@@ -51,7 +51,7 @@ bool leSynth::synthesize(qtauAudioSource &a)
         fmt.setChannelCount(channels);
         a.setAudioFormat(fmt);
 
-        float pulsesPerSecond = (float)songCfg.tempo / 60.f * MIDI_PPQ;
+        float pulsesPerSecond = (float)songCfg.tempo / 60.f * c_midi_ppq;
         int   pulseOffset  = 0;
 
         a.buffer().clear();
